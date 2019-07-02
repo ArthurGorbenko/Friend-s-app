@@ -10,13 +10,14 @@ const CONSTS = {
   TEXT_AREA: document.querySelector(".textarea"),
   ALERT_MESSAGE: document.querySelector(".alert-message"),
   RESET_BUTTON: document.querySelector(".reset"),
-  HAMBURGER: document.querySelector(".input-button"),
+  HAMBURGER: document.querySelector('.hamburger.hamburger--slider'),
   THEME_WRAPPER: document.querySelector(".wrapper-theme-change"),
   BODY: document.querySelector(".default"),
   CARDS: document.getElementsByClassName("card"),
   MENU: document.querySelector(".menu"),
   BUTTONS: document.getElementsByClassName("button"),
-  DARK_INPUT: document.getElementById("dark")
+  DARK_INPUT: document.getElementById("dark"),
+  WRAPPER_MENU : document.querySelector('.wrapper-menu')
 };
 
 let FILTERED_BY_GENDER = false;
@@ -38,8 +39,32 @@ const refreshDMWindow = () => {
   CONSTS.TEXT_AREA.value = "";
 };
 
+let menuToggled = false;
+
+const moveMenu = () => {
+  let position = 0;
+  let middleScreen = Math.floor((window.innerWidth - CONSTS.WRAPPER_MENU.clientWidth)/2);
+  let id = setInterval(relocate,1);
+  function relocate () {
+    if(position === middleScreen){
+      clearInterval(id)
+    } else {
+      position++;
+      CONSTS.WRAPPER_MENU.style.left = position + 'px';
+    }
+  }
+  menuToggled = true;
+}
+
 const moveContent = () => {
   CONSTS.LIST_OF_CARDS.classList.toggle("moveBottom");
+  CONSTS.HAMBURGER.classList.toggle('is-active');
+  if(!menuToggled){
+  moveMenu();
+  } else {
+    CONSTS.WRAPPER_MENU.style.left = '600px';
+    menuToggled = false;
+  }
 };
 
 const writeLetter = ({ target }) => {
@@ -53,10 +78,9 @@ const writeLetter = ({ target }) => {
     if (mediaQuery.matches) {
       CONSTS.HAMBURGER.classList.remove('visually-hidden');
       window.scrollTo({ top: 0, behavior: "smooth" });
-      if (CONSTS.HAMBURGER.checked) {
-        CONSTS.HAMBURGER.checked = false;
-        
+      if (!menuToggled) {
         moveContent();
+        menuToggled = true;
       }
     }
   }
@@ -129,7 +153,7 @@ const changeColorCards = () => {
     CONSTS.CARDS[key].classList.toggle("cardDark");
   }
   for (let index = 0; index < CONSTS.BUTTONS.length; index++) {
-    CONSTS.BUTTONS[index].classList.toggle("buttonDark");
+    CONSTS.BUTTONS[index].classList.toggle("button-dark");
   }
 };
 
@@ -141,7 +165,7 @@ const createNewList = people => {
       CONSTS.CARDS[key].classList.add("cardDark");
     }
     for (let index = 0; index < CONSTS.BUTTONS.length; index++) {
-      CONSTS.BUTTONS[index].classList.add("buttonDark");
+      CONSTS.BUTTONS[index].classList.add("button-dark");
     }
   }
   refreshButtons();
@@ -232,7 +256,7 @@ const resetAll = () => {
 
 CONSTS.RESET_BUTTON.addEventListener("click", resetAll);
 
-CONSTS.HAMBURGER.addEventListener("change", moveContent);
+document.querySelector('.hamburger.hamburger--slider').addEventListener("click", moveContent);
 
 const switchTheme = ({ target }) => {
   if (target.checked) {
@@ -244,9 +268,9 @@ const switchTheme = ({ target }) => {
 CONSTS.THEME_WRAPPER.addEventListener("change", switchTheme);
 
 const init = () => {
-  let mediaQuery = window.matchMedia('(max-width: 610px)');
-  if(mediaQuery.matches){
-    CONSTS.HAMBURGER.classList.toggle('visually-hidden');
+  let isMobile = window.matchMedia('(max-width: 599px)');
+  if(!isMobile.matches){
+    document.querySelector('.hamburger-button').classList.add('visually-hidden');
   } else {
     return ;
   }
