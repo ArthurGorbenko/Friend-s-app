@@ -16,7 +16,7 @@ const CONSTS = {
   CARDS: document.getElementsByClassName("card"),
   MENU: document.querySelector(".menu"),
   BUTTONS: document.getElementsByClassName("button"),
-  DARK_INPUT : document.getElementById("dark")
+  DARK_INPUT: document.getElementById("dark")
 };
 
 let FILTERED_BY_GENDER = false;

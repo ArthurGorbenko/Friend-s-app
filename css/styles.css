@@ -18,11 +18,11 @@ body {
   text-align: center;
 }
 
-.header{
+.header {
   display: flex;
 }
 
-.wrapper-theme-change{
+.wrapper-theme-change {
   width: 20%;
   text-align: right;
 }
@@ -58,12 +58,12 @@ body {
   height: 270px;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
-.cardDark{
+.cardDark {
   background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
-  color:#ccc;
+  color: #ccc;
 }
 .photo {
-  border-radius: 200px 200px 200px 200px;
+  border-radius: 200px;
   -moz-border-radius: 200px 200px 200px 200px;
   -webkit-border-radius: 200px 200px 200px 200px;
   -webkit-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.75);
@@ -83,7 +83,7 @@ body {
 
 .wrapper-menu {
   position: sticky;
-  top: 80;
+  top: 80px;
 }
 
 .menu {
@@ -92,14 +92,14 @@ body {
   flex-direction: column;
   text-align: center;
   position: sticky;
-  top: 80;
+  top: 80px;
   width: 300px;
   height: 310px;
   margin-top: 10px;
   background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
 
-.menuDark{
+.menuDark {
   background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
 }
 
@@ -173,8 +173,8 @@ body {
   background-color: #eee;
   border-radius: 50%;
 }
-.unreset-default-radio{
-  height:unset;
+.unreset-default-radio {
+  height: unset;
 }
 
 .label-radio:hover input ~ .custom-radio {
@@ -185,7 +185,7 @@ body {
   background-color: #2196f3;
 }
 
-.custom-radio-bright{
+.custom-radio-bright {
   position: absolute;
   top: 0;
   left: 0;
@@ -195,7 +195,7 @@ body {
   border-radius: 50%;
 }
 
-.custom-radio-dark{
+.custom-radio-dark {
   position: absolute;
   top: 0;
   left: 0;
@@ -222,7 +222,7 @@ body {
   margin-right: auto;
 }
 
-.buttonDark{
+.buttonDark {
   background: #47476b;
   color: #ccc;
 }
@@ -248,7 +248,7 @@ body {
   background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
 
-.direct-messageDark{
+.direct-messageDark {
   background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
 }
 .textarea {
