@@ -20,7 +20,7 @@ const CONSTS = {
   WRAPPER_MENU : document.querySelector('.wrapper-menu')
 };
 
-let FILTERED_BY_GENDER = false;
+let filteredByGender = false;
 let radioButtons = document.querySelectorAll(".visually-hidden");
 let usersConst;
 let users;
@@ -177,7 +177,7 @@ const processCards = subString => {
   if (!subString || subString === " ") {
     return null;
   }
-  if (!FILTERED_BY_GENDER) {
+  if (!filteredByGender) {
     users = usersConst;
   }
   subString = subString.toLowerCase();
@@ -195,12 +195,12 @@ CONSTS.SEARCH_FIELD.addEventListener("keyup", function() {
 });
 
 const showGender = genderType => {
-  if (FILTERED_BY_GENDER) {
+  if (filteredByGender) {
     users = usersConst;
   }
   users = users.filter(user => user.gender === genderType);
   createNewList(users);
-  FILTERED_BY_GENDER = true;
+  filteredByGender = true;
   if (query) {
     processCards(query);
   }
