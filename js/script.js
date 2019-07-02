@@ -135,10 +135,6 @@ const createCard = user => {
   CONSTS.LIST_OF_CARDS.append(li);
 };
 
-const refreshButtons = () => {
-  CONSTS.LIST_OF_CARDS.addEventListener("click", writeLetter);
-};
-
 const makeDarkBackground = () => {
   CONSTS.BODY.classList.toggle("bodyDark");
   CONSTS.MENU.classList.toggle("menuDark");
@@ -146,12 +142,10 @@ const makeDarkBackground = () => {
 };
 
 const changeColorCards = () => {
-  for (let key = 0; key < CONSTS.CARDS.length; key++) {
-    CONSTS.CARDS[key].classList.toggle("cardDark");
-  }
-  for (let index = 0; index < CONSTS.BUTTONS.length; index++) {
-    CONSTS.BUTTONS[index].classList.toggle("button-dark");
-  }
+  let cards = [...CONSTS.CARDS];
+  cards.forEach(card => card.classList.toggle('cardDark'));
+  let buttons = [...CONSTS.BUTTONS];
+  buttons.forEach(button => button.classList.toggle('button-dark'));
 };
 
 const createNewList = people => {
@@ -165,7 +159,7 @@ const createNewList = people => {
       CONSTS.BUTTONS[index].classList.add("button-dark");
     }
   }
-  refreshButtons();
+  CONSTS.LIST_OF_CARDS.addEventListener("click", writeLetter);
 };
 
 CONSTS.SEND_BUTTON.addEventListener("click", messageSend);
