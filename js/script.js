@@ -26,10 +26,6 @@ let radioButtons = document.querySelectorAll(".visually-hidden");
 let usersConst;
 let users;
 
-const append = (parent, child) => {
-  return parent.appendChild(child);
-};
-
 const letterToUpperCase = word => {
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
@@ -102,7 +98,7 @@ const addLiElements = parent => {
   };
   for (prop in props) {
     props[prop].classList.add("infoFriend");
-    append(parent, props[prop]);
+    parent.append(props[prop]);
   }
   return props;
 };
@@ -126,7 +122,7 @@ const createCard = user => {
   sendLetter.type = "button";
   sendLetter.value = "Send letter";
 
-  [img, listInfo, sendLetter].forEach(el => append(li, el));
+  [img, listInfo, sendLetter].forEach(el => li.append(el));
 
   let properties = addLiElements(listInfo);
 
@@ -138,7 +134,7 @@ const createCard = user => {
     letterToUpperCase(user.name.last);
   properties.phone.innerHTML = "<strong>Phone : </strong>" + user.phone;
 
-  append(CONSTS.LIST_OF_CARDS, li);
+  CONSTS.LIST_OF_CARDS.append(li);
 };
 
 const refreshButtons = () => {
