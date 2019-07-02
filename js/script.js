@@ -103,9 +103,9 @@ const addLiElements = parent => {
   return props;
 };
 
-const createBlock = (tag, classAdd) => {
+const createBlock = (tag, classList) => {
   element = document.createElement(tag);
-  element.classList.add(...classAdd);
+  element.classList.add(...classList);
   return element;
 };
 
