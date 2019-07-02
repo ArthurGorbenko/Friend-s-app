@@ -1,6 +1,6 @@
 const CONSTS = {
   LIST_OF_CARDS: document.querySelector(".list"),
-  DM_FORM: document.querySelector(".direct-message"),
+  DIRECT_MESSAGE_FORM: document.querySelector(".direct-message"),
   FORM: document.querySelector(".form"),
   SEND_BUTTON: document.querySelector(".send-on-click-button"),
   SEARCH_FIELD: document.querySelector(".search-field"),
@@ -17,7 +17,8 @@ const CONSTS = {
   MENU: document.querySelector(".menu"),
   BUTTONS: document.getElementsByClassName("button"),
   DARK_INPUT: document.getElementById("dark"),
-  WRAPPER_MENU : document.querySelector('.wrapper-menu')
+  WRAPPER_MENU : document.querySelector('.wrapper-menu'),
+  MOBILE_RESOLUTION : "(max-width: 610px)"
 };
 
 let filteredByGender = false;
@@ -67,13 +68,15 @@ const moveContent = () => {
   }
 };
 
+
+
 const writeLetter = ({ target }) => {
-  let mediaQuery = window.matchMedia("(max-width: 610px)");
+  let mediaQuery = window.matchMedia(CONSTS.MOBILE_RESOLUTION);
   if (CONSTS.FORM.classList.contains("visually-hidden")) {
     refreshDMWindow();
   }
   if (target.classList.contains("sendMessage")) {
-    CONSTS.DM_FORM.classList.remove("hide-direct-message");
+    CONSTS.DIRECT_MESSAGE_FORM.classList.remove("hide-direct-message");
     CONSTS.EMAIL_FIELD.value = target.parentElement.dataset.email;
     if (mediaQuery.matches) {
       CONSTS.HAMBURGER.classList.remove('visually-hidden');
@@ -145,7 +148,7 @@ const refreshButtons = () => {
 const makeDarkBackground = () => {
   CONSTS.BODY.classList.toggle("bodyDark");
   CONSTS.MENU.classList.toggle("menuDark");
-  CONSTS.DM_FORM.classList.toggle("direct-messageDark");
+  CONSTS.DIRECT_MESSAGE_FORM.classList.toggle("direct-messageDark");
 };
 
 const changeColorCards = () => {
