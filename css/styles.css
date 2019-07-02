@@ -273,7 +273,7 @@ body {
     text-align: center;
   }
   .menu {
-    position: unset;
+    position: relative;
   }
   .direct-message {
     visibility: visible;
