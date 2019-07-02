@@ -10,15 +10,15 @@ const CONSTS = {
   TEXT_AREA: document.querySelector(".textarea"),
   ALERT_MESSAGE: document.querySelector(".alert-message"),
   RESET_BUTTON: document.querySelector(".reset"),
-  HAMBURGER: document.querySelector('.hamburger.hamburger--slider'),
+  HAMBURGER: document.querySelector(".hamburger.hamburger--slider"),
   THEME_WRAPPER: document.querySelector(".wrapper-theme-change"),
   BODY: document.querySelector(".default"),
   CARDS: document.getElementsByClassName("card"),
   MENU: document.querySelector(".menu"),
   BUTTONS: document.getElementsByClassName("button"),
   DARK_INPUT: document.getElementById("dark"),
-  WRAPPER_MENU : document.querySelector('.wrapper-menu'),
-  MOBILE_RESOLUTION : "(max-width: 610px)"
+  WRAPPER_MENU: document.querySelector(".wrapper-menu"),
+  MOBILE_RESOLUTION: "(max-width: 610px)"
 };
 
 let filteredByGender = false;
@@ -40,31 +40,31 @@ let menuToggled = false;
 
 const moveMenu = () => {
   let position = 0;
-  let middleScreen = Math.floor((window.innerWidth - CONSTS.WRAPPER_MENU.clientWidth)/2);
-  let id = setInterval(relocate,1);
-  function relocate () {
-    if(position === middleScreen){
-      clearInterval(id)
+  let middleScreen = Math.floor(
+    (window.innerWidth - CONSTS.WRAPPER_MENU.clientWidth) / 2
+  );
+  let id = setInterval(relocate, 1);
+  function relocate() {
+    if (position === middleScreen) {
+      clearInterval(id);
     } else {
       position++;
-      CONSTS.WRAPPER_MENU.style.left = position + 'px';
+      CONSTS.WRAPPER_MENU.style.left = position + "px";
     }
   }
   menuToggled = true;
-}
+};
 
 const moveContent = () => {
   CONSTS.LIST_OF_CARDS.classList.toggle("moveBottom");
-  CONSTS.HAMBURGER.classList.toggle('is-active');
-  if(!menuToggled){
-  moveMenu();
+  CONSTS.HAMBURGER.classList.toggle("is-active");
+  if (!menuToggled) {
+    moveMenu();
   } else {
-    CONSTS.WRAPPER_MENU.style.left = '600px';
+    CONSTS.WRAPPER_MENU.style.left = "600px";
     menuToggled = false;
   }
 };
-
-
 
 const writeLetter = ({ target }) => {
   let mediaQuery = window.matchMedia(CONSTS.MOBILE_RESOLUTION);
@@ -75,7 +75,7 @@ const writeLetter = ({ target }) => {
     CONSTS.DIRECT_MESSAGE_FORM.classList.remove("hide-direct-message");
     CONSTS.EMAIL_FIELD.value = target.parentElement.dataset.email;
     if (mediaQuery.matches) {
-      CONSTS.HAMBURGER.classList.remove('visually-hidden');
+      CONSTS.HAMBURGER.classList.remove("visually-hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (!menuToggled) {
         moveContent();
@@ -126,13 +126,11 @@ const createCard = user => {
 
   let properties = addLiElements(listInfo);
 
-  properties.age.innerHTML = "<strong>Age : </strong>" + user.dob.age;
-  properties.name.innerHTML =
-    "<strong>Name : </strong>" +
-    letterToUpperCase(user.name.first) +
-    " " +
-    letterToUpperCase(user.name.last);
-  properties.phone.innerHTML = "<strong>Phone : </strong>" + user.phone;
+  properties.age.innerHTML = `<strong>Age : </strong> ${user.dob.age}`;
+  properties.name.innerHTML = `<strong>Name : </strong>
+    ${letterToUpperCase(user.name.first)}
+    ${letterToUpperCase(user.name.last)}`;
+  properties.phone.innerHTML = `<strong>Phone : </strong> ${user.phone}`;
 
   CONSTS.LIST_OF_CARDS.append(li);
 };
@@ -255,7 +253,9 @@ const resetAll = () => {
 
 CONSTS.RESET_BUTTON.addEventListener("click", resetAll);
 
-document.querySelector('.hamburger.hamburger--slider').addEventListener("click", moveContent);
+document
+  .querySelector(".hamburger.hamburger--slider")
+  .addEventListener("click", moveContent);
 
 const switchTheme = ({ target }) => {
   if (target.checked) {
@@ -267,15 +267,17 @@ const switchTheme = ({ target }) => {
 CONSTS.THEME_WRAPPER.addEventListener("change", switchTheme);
 
 const init = () => {
-  let isMobile = window.matchMedia('(max-width: 599px)');
-  if(!isMobile.matches){
-    document.querySelector('.hamburger-button').classList.add('visually-hidden');
+  let isMobile = window.matchMedia("(max-width: 599px)");
+  if (!isMobile.matches) {
+    document
+      .querySelector(".hamburger-button")
+      .classList.add("visually-hidden");
   } else {
-    return ;
+    return;
   }
-}
+};
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener("DOMContentLoaded", init);
 
 fetch(
   "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture"
