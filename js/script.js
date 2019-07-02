@@ -20,7 +20,7 @@ const CONSTS = {
 };
 
 let FILTERED_BY_GENDER = false;
-let radioButtons = document.querySelectorAll(".default-radio");
+let radioButtons = document.querySelectorAll(".visually-hidden");
 let usersConst;
 let users;
 
@@ -33,8 +33,8 @@ const letterToUpperCase = word => {
 };
 
 const refreshDMWindow = () => {
-  CONSTS.FORM.classList.remove("remove");
-  CONSTS.ALERT_MESSAGE.classList.add("remove");
+  CONSTS.FORM.classList.remove("visually-hidden");
+  CONSTS.ALERT_MESSAGE.classList.add("visually-hidden");
   CONSTS.TEXT_AREA.value = "";
 };
 
@@ -44,16 +44,18 @@ const moveContent = () => {
 
 const writeLetter = ({ target }) => {
   let mediaQuery = window.matchMedia("(max-width: 610px)");
-  if (CONSTS.FORM.classList.contains("remove")) {
+  if (CONSTS.FORM.classList.contains("visually-hidden")) {
     refreshDMWindow();
   }
   if (target.classList.contains("sendMessage")) {
     CONSTS.DM_FORM.classList.remove("hide-direct-message");
     CONSTS.EMAIL_FIELD.value = target.parentElement.dataset.email;
     if (mediaQuery.matches) {
+      CONSTS.HAMBURGER.classList.remove('visually-hidden');
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (CONSTS.HAMBURGER.checked) {
         CONSTS.HAMBURGER.checked = false;
+        
         moveContent();
       }
     }
@@ -61,8 +63,8 @@ const writeLetter = ({ target }) => {
 };
 
 const messageSend = () => {
-  CONSTS.FORM.classList.add("remove");
-  CONSTS.ALERT_MESSAGE.classList.remove("remove");
+  CONSTS.FORM.classList.add("visually-hidden");
+  CONSTS.ALERT_MESSAGE.classList.remove("visually-hidden");
 };
 
 const addLiElements = parent => {
@@ -240,6 +242,17 @@ const switchTheme = ({ target }) => {
 };
 
 CONSTS.THEME_WRAPPER.addEventListener("change", switchTheme);
+
+const init = () => {
+  let mediaQuery = window.matchMedia('(max-width: 610px)');
+  if(mediaQuery.matches){
+    CONSTS.HAMBURGER.classList.toggle('visually-hidden');
+  } else {
+    return ;
+  }
+}
+
+document.addEventListener('DOMContentLoaded',init);
 
 fetch(
   "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture"
