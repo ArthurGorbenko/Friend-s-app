@@ -1,17 +1,17 @@
 const CONSTS = {
   LIST_OF_CARDS: document.querySelector(".list"),
-  DM_FORM: document.querySelector(".directMessage"),
+  DM_FORM: document.querySelector(".direct-message"),
   FORM: document.querySelector(".form"),
-  SEND_BUTTON: document.querySelector(".sendOnClick"),
-  SEARCH_FIELD: document.querySelector("#searchField"),
-  RADIO_AGE_FORM: document.querySelector(".wrapperRadioAge"),
-  RADIO_GENDER_FORM: document.querySelector(".wrapperRadioGender"),
-  EMAIL_FIELD: document.querySelector(".emailField"),
-  TEXT_AREA: document.querySelector(".textArea"),
-  ALERT_MESSAGE: document.querySelector(".alertMessage"),
+  SEND_BUTTON: document.querySelector(".send-on-click-button"),
+  SEARCH_FIELD: document.querySelector(".search-field"),
+  RADIO_AGE_FORM: document.querySelector(".wrapper-radio-age"),
+  RADIO_GENDER_FORM: document.querySelector(".wrapper-radio-gender"),
+  EMAIL_FIELD: document.querySelector(".email-field"),
+  TEXT_AREA: document.querySelector(".textarea"),
+  ALERT_MESSAGE: document.querySelector(".alert-message"),
   RESET_BUTTON: document.querySelector(".reset"),
-  HAMBURGER: document.querySelector(".inputButton"),
-  THEME_WRAPPER: document.querySelector(".wrapperThemeChange"),
+  HAMBURGER: document.querySelector(".input-button"),
+  THEME_WRAPPER: document.querySelector(".wrapper-theme-change"),
   BODY: document.querySelector(".default"),
   CARDS: document.getElementsByClassName("card"),
   MENU: document.querySelector(".menu"),
@@ -20,7 +20,7 @@ const CONSTS = {
 };
 
 let FILTERED_BY_GENDER = false;
-let radioButtons = document.querySelectorAll(".defaultRadio");
+let radioButtons = document.querySelectorAll(".default-radio");
 let usersConst;
 let users;
 
@@ -48,7 +48,7 @@ const writeLetter = ({ target }) => {
     refreshDMWindow();
   }
   if (target.classList.contains("sendMessage")) {
-    CONSTS.DM_FORM.classList.remove("hideDM");
+    CONSTS.DM_FORM.classList.remove("hide-direct-message");
     CONSTS.EMAIL_FIELD.value = target.parentElement.dataset.email;
     if (mediaQuery.matches) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -119,7 +119,7 @@ const refreshButtons = () => {
 const makeDarkBackground = () => {
   CONSTS.BODY.classList.toggle("bodyDark");
   CONSTS.MENU.classList.toggle("menuDark");
-  CONSTS.DM_FORM.classList.toggle("directMessageDark");
+  CONSTS.DM_FORM.classList.toggle("direct-messageDark");
 };
 
 const changeColorCards = () => {
