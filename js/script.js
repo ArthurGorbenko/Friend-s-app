@@ -225,9 +225,8 @@ const ageSort = ({ target }) => {
 CONSTS.RADIO_AGE_FORM.addEventListener("change", ageSort);
 
 const resetRadio = allButtons => {
-  for (let key = 0; key < allButtons.length; key++) {
-    allButtons[key].checked = false;
-  }
+  let buttons = [...allButtons];
+  buttons.forEach(button => button.checked = false);
 };
 
 const resetAll = () => {
