@@ -18,7 +18,8 @@ const CONSTS = {
   BUTTONS: document.getElementsByClassName("button"),
   DARK_INPUT: document.getElementById("dark"),
   WRAPPER_MENU: document.querySelector(".wrapper-menu"),
-  MOBILE_RESOLUTION: "(max-width: 610px)"
+  MOBILE_RESOLUTION: "(max-width: 610px)",
+  SORT_BY_ASCENDING: "ascending"
 };
 
 let filteredByGender = false;
@@ -205,7 +206,7 @@ CONSTS.RADIO_GENDER_FORM.addEventListener("change", genderFilter);
 
 const sortingProcess = typeOfSort => {
   const runSort = (a, b) => a.dob.age - b.dob.age;
-  if (typeOfSort === "ascending") {
+  if (typeOfSort === CONSTS.SORT_BY_ASCENDING) {
     users.sort(runSort);
   } else {
     users.sort((a, b) => runSort(b, a));
@@ -216,11 +217,8 @@ const sortingProcess = typeOfSort => {
 
 const ageSort = ({ target }) => {
   if (target.checked) {
-    if (target.dataset.render === "descending") {
-      sortingProcess("descending");
-    } else {
-      sortingProcess("ascending");
-    }
+    let sortType = target.dataset.render;
+    sortingProcess(sortType);
   }
 };
 
