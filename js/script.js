@@ -162,7 +162,7 @@ const createNewList = people => {
 
 CONSTS.SEND_BUTTON.addEventListener("click", messageSend);
 
-const processCards = subString => {
+const searchPeople = subString => {
   if (!subString || subString === " ") {
     return null;
   }
@@ -180,7 +180,7 @@ let query = "";
 
 CONSTS.SEARCH_FIELD.addEventListener("keyup", function() {
   query = this.value.toLowerCase();
-  processCards(query);
+  searchPeople(query);
 });
 
 const showGender = genderType => {
@@ -191,7 +191,7 @@ const showGender = genderType => {
   createNewList(users);
   filteredByGender = true;
   if (query) {
-    processCards(query);
+    searchPeople(query);
   }
 };
 
@@ -215,7 +215,7 @@ const sortingProcess = typeOfSort => {
     users.sort((a, b) => runSort(b, a));
   }
   createNewList(users);
-  processCards(query);
+  searchPeople(query);
 };
 
 const ageSort = ({ target }) => {
