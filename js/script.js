@@ -197,11 +197,7 @@ const showGender = genderType => {
 
 const genderFilter = ({ target }) => {
   if (target.checked) {
-    if (target.dataset.gender === "male") {
-      showGender(target.dataset.gender);
-    } else if (target.dataset.gender === "female") {
-      showGender(target.dataset.gender);
-    }
+    showGender(target.dataset.gender);
   }
 };
 
