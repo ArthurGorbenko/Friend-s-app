@@ -143,21 +143,19 @@ const makeDarkBackground = () => {
 
 const changeColorCards = () => {
   let cards = [...CONSTS.CARDS];
-  cards.forEach(card => card.classList.toggle('cardDark'));
+  cards.forEach(card => card.classList.toggle("card-dark"));
   let buttons = [...CONSTS.BUTTONS];
-  buttons.forEach(button => button.classList.toggle('button-dark'));
+  buttons.forEach(button => button.classList.toggle("button-dark"));
 };
 
 const createNewList = people => {
   CONSTS.LIST_OF_CARDS.innerHTML = "";
-  people.forEach(man => createCard(man));
+  people.forEach(person => createCard(person));
   if (CONSTS.DARK_INPUT.checked) {
-    for (let key = 0; key < CONSTS.CARDS.length; key++) {
-      CONSTS.CARDS[key].classList.add("cardDark");
-    }
-    for (let index = 0; index < CONSTS.BUTTONS.length; index++) {
-      CONSTS.BUTTONS[index].classList.add("button-dark");
-    }
+    let cards = [...CONSTS.CARDS];
+    cards.forEach(card => card.classList.add("card-dark"));
+    let buttons = [...CONSTS.BUTTONS];
+    buttons.forEach(button => button.classList.add("button-dark"));
   }
   CONSTS.LIST_OF_CARDS.addEventListener("click", writeLetter);
 };
