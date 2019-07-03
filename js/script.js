@@ -265,8 +265,11 @@ const getData = (peoples) => {
 };
 
 fetch("https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture")
-  .then(resp => resp.json())
-  .then(({results})=> getData(results))
-  .catch(function(error) {
-    console.log(error);
-  });
+  .then(res => {
+    if(res.ok){
+      return res.json();
+    } else {
+     throw new Error(res.statusText);
+    }
+  })
+  .then(({results})=> getData(results));
