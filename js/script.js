@@ -229,14 +229,14 @@ const resetRadio = allButtons => {
   buttons.forEach(button => button.checked = false);
 };
 
-const resetAll = () => {
+const resetAllOptions = () => {
   CONSTS.SEARCH_FIELD.value = "";
   query = "";
   resetRadio(radioButtons);
   createNewList(usersConst);
 };
 
-CONSTS.RESET_BUTTON.addEventListener("click", resetAll);
+CONSTS.RESET_BUTTON.addEventListener("click", resetAllOptions);
 
 document
   .querySelector(".hamburger.hamburger--slider")
