@@ -18,7 +18,7 @@ const CONSTS = {
   BUTTONS: document.getElementsByClassName("button"),
   DARK_INPUT: document.getElementById("dark"),
   WRAPPER_MENU: document.querySelector(".wrapper-menu"),
-  MOBILE_RESOLUTION: "(max-width: 610px)",
+  MOBILE_RESOLUTION: "(max-width: 599px)",
   SORT_BY_ASCENDING: "ascending"
 };
 
@@ -57,7 +57,7 @@ const moveMenu = () => {
 };
 
 const moveContent = () => {
-  CONSTS.LIST_OF_CARDS.classList.toggle("moveBottom");
+  CONSTS.LIST_OF_CARDS.classList.toggle("move-bottom");
   CONSTS.HAMBURGER.classList.toggle("is-active");
   if (!menuToggled) {
     moveMenu();
@@ -161,8 +161,6 @@ const createNewList = people => {
   CONSTS.LIST_OF_CARDS.addEventListener("click", writeLetter);
 };
 
-CONSTS.SEND_BUTTON.addEventListener("click", messageSend);
-
 const searchPeople = subString => {
   if (!subString || subString === " ") {
     return null;
@@ -178,11 +176,6 @@ const searchPeople = subString => {
 };
 
 let query = "";
-
-CONSTS.SEARCH_FIELD.addEventListener("keyup", function() {
-  query = this.value.toLowerCase();
-  searchPeople(query);
-});
 
 const showGender = genderType => {
   if (filteredByGender) {
@@ -202,8 +195,6 @@ const genderFilter = ({ target }) => {
   }
 };
 
-CONSTS.RADIO_GENDER_FORM.addEventListener("change", genderFilter);
-
 const sortingProcess = typeOfSort => {
   const runSort = (a, b) => a.dob.age - b.dob.age;
   if (typeOfSort === CONSTS.SORT_BY_ASCENDING) {
@@ -222,11 +213,9 @@ const ageSort = ({ target }) => {
   }
 };
 
-CONSTS.RADIO_AGE_FORM.addEventListener("change", ageSort);
-
 const resetRadio = allButtons => {
   let buttons = [...allButtons];
-  buttons.forEach(button => button.checked = false);
+  buttons.forEach(button => (button.checked = false));
 };
 
 const resetAllOptions = () => {
@@ -236,12 +225,6 @@ const resetAllOptions = () => {
   createNewList(usersConst);
 };
 
-CONSTS.RESET_BUTTON.addEventListener("click", resetAllOptions);
-
-document
-  .querySelector(".hamburger.hamburger--slider")
-  .addEventListener("click", moveContent);
-
 const switchTheme = ({ target }) => {
   if (target.checked) {
     makeDarkBackground();
@@ -249,31 +232,41 @@ const switchTheme = ({ target }) => {
   }
 };
 
-CONSTS.THEME_WRAPPER.addEventListener("change", switchTheme);
-
-const init = () => {
-  let isMobile = window.matchMedia("(max-width: 599px)");
+const addHamburgerOnMobile = () => {
+  let isMobile = window.matchMedia(CONSTS.MOBILE_RESOLUTION);
+  console.log(CONSTS.HAMBURGER);
   if (!isMobile.matches) {
-    document
-      .querySelector(".hamburger-button")
-      .classList.add("visually-hidden");
+    CONSTS.HAMBURGER.classList.add("visually-hidden");
   } else {
     return;
   }
 };
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", addHamburgerOnMobile);
 
-fetch(
-  "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture"
-)
+const start = () => {
+  CONSTS.HAMBURGER.addEventListener("click", moveContent);
+  CONSTS.SEND_BUTTON.addEventListener("click", messageSend);
+  CONSTS.RADIO_GENDER_FORM.addEventListener("change", genderFilter);
+  CONSTS.RADIO_AGE_FORM.addEventListener("change", ageSort);
+  CONSTS.RESET_BUTTON.addEventListener("click", resetAllOptions);
+  CONSTS.THEME_WRAPPER.addEventListener("change", switchTheme);
+  CONSTS.SEARCH_FIELD.addEventListener("keyup", function() {
+    query = this.value.toLowerCase();
+    searchPeople(query);
+  });
+};
+
+const getData = (peoples) => {
+  usersConst = peoples;
+  users = usersConst;
+  createNewList(users);
+  start();
+};
+
+fetch("https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture")
   .then(resp => resp.json())
-  .then(function(data) {
-    usersConst = data.results;
-    users = usersConst;
-    return createNewList(users);
-  })
-
+  .then(({results})=> getData(results))
   .catch(function(error) {
     console.log(error);
   });
