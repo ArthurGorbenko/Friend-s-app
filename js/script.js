@@ -29,6 +29,8 @@ let filteredByGender = false;
 let radioButtons = document.querySelectorAll(".visually-hidden");
 let usersConst;
 let users;
+let query = "";
+let menuToggled = false;
 
 const letterToUpperCase = word => {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -40,7 +42,6 @@ const refreshDMWindow = () => {
   CONSTS.TEXT_AREA.value = "";
 };
 
-let menuToggled = false;
 
 const moveMenu = () => {
   let position = 0;
@@ -182,7 +183,6 @@ const searchPeople = subString => {
   createNewList(usersFound, DARK_INPUT_ID, CARD_CLASS, BUTTON_CLASS);
 };
 
-let query = "";
 
 const showGender = genderType => {
   if (filteredByGender) {
@@ -282,4 +282,4 @@ const getData = url => {
 };
 
 getData(address);
-
+ 
