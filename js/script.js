@@ -22,6 +22,8 @@ const SORT_BY_ASCENDING = "ascending";
 const CARD_CLASS = "card";
 const BUTTON_CLASS = "button";
 const DARK_INPUT_ID = "dark";
+const address =
+  "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture";
 
 let filteredByGender = false;
 let radioButtons = document.querySelectorAll(".visually-hidden");
@@ -239,7 +241,6 @@ const switchTheme = ({ target }) => {
 
 const addHamburgerOnMobile = () => {
   let isMobile = window.matchMedia(MOBILE_RESOLUTION);
-  console.log(CONSTS.HAMBURGER);
   if (!isMobile.matches) {
     CONSTS.HAMBURGER.classList.add("visually-hidden");
   } else {
@@ -262,21 +263,23 @@ const start = () => {
   });
 };
 
-const getData = peoples => {
-  usersConst = peoples;
+const processPeople = usersData => {
+  usersConst = usersData;
   users = usersConst;
   createNewList(users, DARK_INPUT_ID, CARD_CLASS, BUTTON_CLASS);
   start();
 };
 
-fetch(
-  "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture"
-)
-  .then(res => {
+const getData = url => {
+  fetch(url).then(res => {
     if (res.ok) {
       return res.json();
-    } else {
-      throw new Error(res.statusText);
     }
+    throw new Error(res.statusText);
+  }).then(({results}) =>{
+    processPeople(results);
   })
-  .then(({ results }) => getData(results));
+};
+
+getData(address);
+
