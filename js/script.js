@@ -118,7 +118,7 @@ const createCard = user => {
   CONSTS.LIST_OF_CARDS.append(li);
 };
 
-const makeDarkBackground = () => {
+const toogleAppTheme = () => {
   CONSTS.BODY.classList.toggle("body-mod-dark");
   CONSTS.MENU.classList.toggle("menu-mod-dark");
   CONSTS.DIRECT_MESSAGE_FORM.classList.toggle("direct-messageDark");
@@ -212,7 +212,7 @@ const resetAllOptions = () => {
 
 const switchTheme = ({ target }) => {
   if (target.checked) {
-    makeDarkBackground();
+    toogleAppTheme();
     changeColorCards("card", "button");
   }
 };
