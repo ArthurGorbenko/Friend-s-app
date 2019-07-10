@@ -22,7 +22,7 @@ const SORT_BY_ASCENDING = "ascending";
 const CARD_CLASS = "card";
 const BUTTON_CLASS = "button";
 const DARK_INPUT_ID = "dark";
-const address =
+const ADDRESS =
   "https://randomuser.me/api/?results=40&inc=gender,name,email,phone,dob,picture";
 
 let filteredByGender = false;
@@ -42,33 +42,11 @@ const refreshDMWindow = () => {
   CONSTS.TEXT_AREA.value = "";
 };
 
-
-const moveMenu = () => {
-  let position = 0;
-  let middleScreen = Math.floor(
-    (window.innerWidth - CONSTS.WRAPPER_MENU.clientWidth) / 2
-  );
-  let id = setInterval(relocate, 1);
-  function relocate() {
-    if (position === middleScreen) {
-      clearInterval(id);
-    } else {
-      position++;
-      CONSTS.WRAPPER_MENU.style.left = position + "px";
-    }
-  }
-  menuToggled = true;
-};
-
 const moveContent = () => {
   CONSTS.LIST_OF_CARDS.classList.toggle("move-bottom");
   CONSTS.HAMBURGER.classList.toggle("is-active");
-  if (!menuToggled) {
-    moveMenu();
-  } else {
-    CONSTS.WRAPPER_MENU.style.left = "600px";
-    menuToggled = false;
-  }
+  CONSTS.WRAPPER_MENU.classList.toggle('menu-move-bottom');
+  menuToggled = false;
 };
 
 const writeLetter = ({ target }) => {
@@ -239,17 +217,6 @@ const switchTheme = ({ target }) => {
   }
 };
 
-const addHamburgerOnMobile = () => {
-  let isMobile = window.matchMedia(MOBILE_RESOLUTION);
-  if (!isMobile.matches) {
-    CONSTS.HAMBURGER.classList.add("visually-hidden");
-  } else {
-    return;
-  }
-};
-
-document.addEventListener("DOMContentLoaded", addHamburgerOnMobile);
-
 const start = () => {
   CONSTS.HAMBURGER.addEventListener("click", moveContent);
   CONSTS.SEND_BUTTON.addEventListener("click", messageSend);
@@ -281,5 +248,5 @@ const getData = url => {
   })
 };
 
-getData(address);
+getData(ADDRESS);
  
