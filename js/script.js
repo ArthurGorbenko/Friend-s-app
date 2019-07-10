@@ -119,8 +119,8 @@ const createCard = user => {
 };
 
 const makeDarkBackground = () => {
-  CONSTS.BODY.classList.toggle("bodyDark");
-  CONSTS.MENU.classList.toggle("menuDark");
+  CONSTS.BODY.classList.toggle("body-mod-dark");
+  CONSTS.MENU.classList.toggle("menu-mod-dark");
   CONSTS.DIRECT_MESSAGE_FORM.classList.toggle("direct-messageDark");
 };
 
